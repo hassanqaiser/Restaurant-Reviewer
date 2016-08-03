@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div ng-repeat="review in RestaurantCtrl.reviews">
+        <div class="well" tabindex="0">
+            <div class="row">
+                <div class="col-md-1">
+                    {{review.reviewer}}
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        {{review.date}}
+                    </div>
+                    <div class="row">
+                        {{review.comments}}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <ng-rating ng-model="review.stars"
+                        editable="false"
+                        stars-count="5"
+                        based-on="5"
+                        show-grade="false">
+                    </ng-rating>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <form name="createReviewForm" novalidate ng-submit="vm.createReview()" autocomplete="on">
+
+      <!-- Page 1 Start -->
+        <div class="form-group required"
+           ng-class="{ 'has-error': createReviewForm.reviewerName.$touched && createReviewForm.reviewerName.$invalid }">
+
+          <label for="reviewerName" class="control-label">Name:</label>
+          <input id="reviewerName" class="form-control" name="reviewerName" type="text" ng-model="vm.reviewerName"
+                 placeholder="Name" required autofocus>
+
+          <span class="help-block" ng-show="createReviewForm.reviewerName.$error.required && createReviewForm.reviewerName.$touched">Name is Required.</span>
+
+      </div>
+    </form>
+  </div>
+</div>

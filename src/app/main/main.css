@@ -1,0 +1,46 @@
+
+.form-restFilters {
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-restFilters .form-restFilters-heading,
+.form-restFilters .checkbox {
+  margin-bottom: 10px;
+}
+.info {
+  font-weight: bold;
+  margin-bottom: 10px;
+  line-height:35px;
+}
+.form-restFilters .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-restFilters .form-control:focus {
+  z-index: 2;
+}
+.form-restFilters select[id="locationSearch"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-restFilters select[id="typeSearch"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-restFilters select[id="priceSearch"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-restFilters select[id="ratingSearch"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

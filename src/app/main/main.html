@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="jumbotron">
+    <div class="form-restFilters">
+      <form name="createEventForm" autocomplete="on" role="search">
+
+        <div class="form-group col-md-12">
+
+          <div class="col-md-3">
+            <label for="typeSearch" class="control-label">Search by Type</label>
+            <select id="typeSearch" class="form-control" name="typeSearch" aria-label="Search by Type" ng-model="main.typeSearch">
+              <option value="All types">All types</option>
+              <option ng-repeat="type in main.types" value="{{type}}">{{type}}
+            </select>
+         </div>
+
+         <div class="col-md-3">
+           <label for="priceSearch" class="control-label">Search by price</label>
+           <select id="priceSearch" class="form-control" name="priceSearch" aria-label="Search by Price" ng-model="main.priceSearch">
+               <option>All prices</option>
+               <option ng-repeat="price in main.prices" value="{{price.value}}">{{price.label}}
+           </select>
+         </div>
+         <div class="col-md-3">
+           <label for="ratingSearch" class="control-label">Search by Rating</label>
+           <select id="ratingSearch" class="form-control" aria-label="Search by Rating" ng-model="main.ratingSearch">
+               <option>All ratings</option>
+               <option ng-repeat="rating in main.ratings" value="{{rating}}">{{rating}}
+           </select>
+         </div>
+
+         <div class="col-md-3">
+           <label for="locationSearch" class="control-label">Search by Location</label>
+           <select id="locationSearch" class="form-control" name="locationSearch"  aria-label="Search by Location" ng-model="main.locationSearch">
+             <option value="All locations">All locations</option>
+             <option ng-repeat="loc in main.locations" value="{{loc}}">{{loc}}</option>
+           </select>
+         </div>
+        </div>
+
+    </form>
+  </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-12">
+          <span style="text-align: center;" class="info" tabindex="0">{{filtered.length}} restaurants found.</span>
+      </div>
+  </div>
+
+  <div class="row">
+    <div ng-repeat="rest in main.restaurants| filter: main.filterRestaurants as filtered">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" tabindex="0">
+         <div class="well">
+          <div class="row" style="min-height:225px;">
+            <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">
+              <div class="row">
+                <img ghs-lazy-loader="{{rest.image}}" style="width:140px;height:130px;" alt="Up Thai logo" class="s-background-photo s-img-responsive" src="{{rest.image}}">
+                <div class="s-card-gridHeader">
+                  <div class="s-card-gridHeader-text">
+                    <ng-rating ng-model="rest.rating"
+            					editable="false"
+            					stars-count="5"
+            					based-on="5"
+            					show-grade="false">
+            				</ng-rating>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <span>
+                  <p>{{ rest.timings }}</p>
+                  <h4><span class="glyphicon glyphicon-phone" aria-hidden="true">{{ rest.phone }}</span></h4>
+                </span><!----> <!---->
+              </div><!---->
+            </div><!---->
+            <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">
+              <h4><a ui-sref="restaurantsDetails({ restaurant: rest.name })"
+                aria-label="View comments for {{rest.name}}.">{{rest.name}}</a></h4>
+              <p>{{ rest.address }}</p>
+              <p>{{ rest.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
