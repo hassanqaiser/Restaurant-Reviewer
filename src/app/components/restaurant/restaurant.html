@@ -1,45 +1,85 @@
 <div class="container">
-  <div class="row">
-    <div ng-repeat="review in RestaurantCtrl.reviews">
-        <div class="well" tabindex="0">
-            <div class="row">
-                <div class="col-md-1">
-                    {{review.reviewer}}
-                </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        {{review.date}}
-                    </div>
-                    <div class="row">
-                        {{review.comments}}
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <ng-rating ng-model="review.stars"
-                        editable="false"
-                        stars-count="5"
-                        based-on="5"
-                        show-grade="false">
-                    </ng-rating>
-                </div>
-            </div>
-        </div>
+
+  <div class="row reviewsection">
+    <div class="row well">
+      <div>
+        <label style="font-size: 24px;" tabindex="0" id="title">Reviews of {{RestaurantCtrl.restaurantName}}</label>
       </div>
     </div>
     <div class="row">
-      <form name="createReviewForm" novalidate ng-submit="vm.createReview()" autocomplete="on">
+      <div ng-repeat="review in RestaurantCtrl.reviews">
+          <div class="well" tabindex="0">
+              <div class="row">
+                  <div class="col-md-1">
+                      {{review.reviewer}}
+                  </div>
+                  <div class="col-md-8">
+                      <div class="row">
+                          {{review.date}}
+                      </div>
+                      <div class="row">
+                          {{review.comments}}
+                      </div>
+                  </div>
+                  <div class="col-md-2">
+                      <ng-rating ng-model="review.stars"
+                          editable="false"
+                          stars-count="5"
+                          based-on="5"
+                          show-grade="false">
+                      </ng-rating>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row well">
+
+      <form name="createReviewForm" novalidate ng-submit="RestaurantCtrl.addReview()" autocomplete="on">
 
       <!-- Page 1 Start -->
         <div class="form-group required"
            ng-class="{ 'has-error': createReviewForm.reviewerName.$touched && createReviewForm.reviewerName.$invalid }">
 
-          <label for="reviewerName" class="control-label">Name:</label>
-          <input id="reviewerName" class="form-control" name="reviewerName" type="text" ng-model="vm.reviewerName"
-                 placeholder="Name" required autofocus>
+          <label for="reviewerName" class="sr-only">Enter Name</label>
+          <input id="reviewerName" class="form-control" name="reviewerName" type="text" ng-model="RestaurantCtrl.reviewerName"
+                 placeholder="Enter Name" required>
 
           <span class="help-block" ng-show="createReviewForm.reviewerName.$error.required && createReviewForm.reviewerName.$touched">Name is Required.</span>
 
       </div>
+      <div class="form-group">
+
+        <uib-rating max="5" ng-model="RestaurantCtrl.rating" role="slider" aria-label="Rate {{RestaurantCtrl.restaurantName}}"></uib-rating>
+
+
+      </div>
+      <div class="form-group required"
+            ng-class="{ 'has-error': createReviewForm.reviewerComment.$touched && createReviewForm.reviewerComment.$invalid }">
+        <label for="reviewerComment" class="sr-only">Write Review</label>
+        <textarea id="reviewerComment" class="form-control" name="reviewerComment" ng-model="RestaurantCtrl.reviewerComment"
+               placeholder="Write Review" required rows="5"></textarea>
+
+        <span class="help-block" ng-show="createReviewForm.reviewerComment.$error.required && createReviewForm.reviewerComment.$touched">Please write Review.</span>
+
+      </div>
+      <div class="form-group" >
+        <button type="submit" class="btn btn-primary"
+              id="submit" value="Submit" ng-disabled="createReviewForm.$invalid || !createReviewForm.$dirty">
+          <span>Save</span>
+        </button>
+      </div>
+
     </form>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-sm-8">
+    </div>
+    <div class="col-md-2 col-sm-4">
+      <button class="btn btn-primary" id="homeBtn" ng-click="RestaurantCtrl.goHome()" aria-label="Home Button">
+        <span>Home</span>
+      </button>
+    </div>
   </div>
 </div>

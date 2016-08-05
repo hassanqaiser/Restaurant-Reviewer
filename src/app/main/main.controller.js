@@ -8,10 +8,12 @@
   /** @ngInject */
   function MainController($rootScope, restaurantData) {
     var vm = this;
+    $("#searchFilters").focus();
     vm.typeSearch = 'All types';
     vm.priceSearch = 'All prices';
     vm.ratingSearch = 'All ratings';
     vm.locationSearch = 'All locations';
+
     var tmpPricesObjArray = [];
     restaurantData.getData('assets/data/restaurants.json').then(function(response) {
         vm.restaurants = response.data;

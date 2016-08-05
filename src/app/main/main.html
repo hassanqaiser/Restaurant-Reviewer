@@ -1,16 +1,17 @@
 <div class="container">
   <div class="jumbotron">
-    <div class="form-restFilters">
-      <form name="createEventForm" autocomplete="on" role="search">
+    <div class="form-restFilters" id="searchFilters" tabindex="0" aria-label="Search Filters">
+      <form name="createEventForm" id="createEventForm" autocomplete="on" role="form">
 
         <div class="form-group col-md-12">
 
           <div class="col-md-3">
             <label for="typeSearch" class="control-label">Search by Type</label>
-            <select id="typeSearch" class="form-control" name="typeSearch" aria-label="Search by Type" ng-model="main.typeSearch">
-              <option value="All types">All types</option>
+            <select id="typeSearch" class="form-control" name="typeSearch" ng-model="main.typeSearch" aria-label="Search by Type">
+              <option value="All types" >All types</option>
               <option ng-repeat="type in main.types" value="{{type}}">{{type}}
             </select>
+
          </div>
 
          <div class="col-md-3">
@@ -32,7 +33,7 @@
            <label for="locationSearch" class="control-label">Search by Location</label>
            <select id="locationSearch" class="form-control" name="locationSearch"  aria-label="Search by Location" ng-model="main.locationSearch">
              <option value="All locations">All locations</option>
-             <option ng-repeat="loc in main.locations" value="{{loc}}">{{loc}}</option>
+             <option ng-repeat="loc in main.locations" value="{{loc}}" >{{loc}}</option>
            </select>
          </div>
         </div>
@@ -43,25 +44,35 @@
 
   <div class="row">
       <div class="col-md-12">
-          <span style="text-align: center;" class="info" tabindex="0">{{filtered.length}} restaurants found.</span>
+          <span style="text-align: center;" class="info" role="status" aria-live="polite" ng-show="main.typeSearch !== 'All types' || main.priceSearch !== 'All prices' || main.ratingSearch !== 'All ratings' || main.locationSearch !== 'All locations'">{{filtered.length}} restaurants found.</span>
       </div>
   </div>
 
-  <div class="row">
+  <div class="row" tabindex="0" aria-label="Restaurants Section">
     <div ng-repeat="rest in main.restaurants| filter: main.filterRestaurants as filtered">
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" tabindex="0">
          <div class="well">
-          <div class="row" style="min-height:225px;">
+          <div class="row" style="min-height:250px;">
+            <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">
+              <h4><p>{{ rest.name }}</p></h4>
+
+              <p>{{ rest.address }}</p>
+              <p>{{ rest.description }}</p>
+              <h5><span class="glyphicon glyphicon-phone" aria-hidden="true">{{ rest.phone }}</span></h5>
+            </div>
             <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">
               <div class="row">
-                <img ghs-lazy-loader="{{rest.image}}" style="width:140px;height:130px;" alt="Up Thai logo" class="s-background-photo s-img-responsive" src="{{rest.image}}">
+                <img role="img" style="width:140px;height:130px;" alt="{{rest.imgDesc}}" class="s-background-photo s-img-responsive" src="{{rest.image}}">
                 <div class="s-card-gridHeader">
                   <div class="s-card-gridHeader-text">
-                    <ng-rating ng-model="rest.rating"
+                    <ng-rating
+                      ng-model="rest.rating"
             					editable="false"
             					stars-count="5"
             					based-on="5"
-            					show-grade="false">
+            					show-grade="false"
+                      tabindex="0"
+                      aria-label="Rating is {{rest.rating}}">
             				</ng-rating>
                   </div>
                 </div>
@@ -69,16 +80,12 @@
               <div class="row">
                 <span>
                   <p>{{ rest.timings }}</p>
-                  <h4><span class="glyphicon glyphicon-phone" aria-hidden="true">{{ rest.phone }}</span></h4>
+                  <a ui-sref="restaurantsDetails({ restaurant: rest.name })"
+                    aria-label="Write Review or Open Existing Reviews" class="infoReviews">View Reviews</a>
+
                 </span><!----> <!---->
               </div><!---->
             </div><!---->
-            <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">
-              <h4><a ui-sref="restaurantsDetails({ restaurant: rest.name })"
-                aria-label="View comments for {{rest.name}}.">{{rest.name}}</a></h4>
-              <p>{{ rest.address }}</p>
-              <p>{{ rest.description }}</p>
-            </div>
           </div>
         </div>
       </div>
