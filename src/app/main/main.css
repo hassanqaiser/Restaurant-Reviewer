@@ -47,3 +47,13 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+div.item {
+    display: inline-block;
+    *display: inline;
+    width:220px;
+    background-color:#DBDBDB;
+    margin:8px;
+    vertical-align: top;
+    zoom: 1;
+}

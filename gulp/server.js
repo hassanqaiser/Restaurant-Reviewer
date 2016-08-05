@@ -50,7 +50,12 @@ gulp.task('serve', ['watch'], function () {
   browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
 });
 
-gulp.task('serve:dist', ['build'], function () {
+gulp.task('moveAngularBootstrap', function() {
+  gulp.src(conf.paths.src + '/assets/files/ui-bootstrap-tpls.js')
+    .pipe(gulp.dest(conf.wiredep.directory + '/angular-bootstrap'));
+});
+
+gulp.task('serve:dist', ['moveAngularBootstrap', 'build'], function () {
   browserSyncInit(conf.paths.dist);
 });
 
